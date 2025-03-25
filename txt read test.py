@@ -12,14 +12,14 @@ def read_txt(folder_path, skip_rows, columns, nrows, name, iso):
             print(filename)
             file_path = os.path.join(folder_path, filename)
             txt_append = pd.read_csv(file_path, delimiter='\t', skiprows=skip_rows, usecols=columns, nrows=nrows)
-            #txt_append.title = f'File {seg_name[len(seg_name)-1]} Data'
-           # txt_data = txt_data._append(txt_append)
-    return txt_append
+            txt_data = txt_data._append(txt_append)
+    #txt_data.columns = ['Frequency', 'Data 1', 'Data 2', 'Data 3']
+    return txt_data
 
 use_cols = [1,2]
-skip_rows = 84
+skip_rows = 83
 name = 'C:/Users/eds5328/Downloads/Diamond/Diamond'
-df = read_txt(name,skip_rows,use_cols,6400,'Diamond','0.1875ISO')
+df = read_txt(name,skip_rows,use_cols,6401,'Diamond','0.1875ISO')
 print(df)
 '''
 plt.figure(figsize=(10, 6))

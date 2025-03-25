@@ -12,7 +12,7 @@ def read_txt(folder_path, skip_rows, columns, nrows, name, iso):
     txt_data = {"Frequency": [], "20*log10(u_out_center/u_in)": []}
     avg_data = {"Frequency": [], "20*log10(u_out_center/u_in)": []}
     for filename in os.listdr(folder_path):
-        seg_name_1 = filename.split('.')
+        seg_name_1 = filename.split('.txt')
         seg_name = seg_name_1[0].split('_')
         if seg_name[0] == name and seg_name[2] == iso:
             file_path = os.path.join(folder_path, filename)
