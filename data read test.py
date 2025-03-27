@@ -20,11 +20,23 @@ def read_txt(folder_path, skip_rows, columns, nrows, name, iso):
             txt_data = txt_data.append(txt_append)
     return txt_data
 
-def read_csv(folder_path, title):
+def read_csv(folder_path, name, iso):
     for filename in os.listdir(folder_path):
         if filename.endswith(".csv"):
-            file_path = os.path.join(folder_path, filename)
             seg_name = filename.split('_')
-            csv_data = pd.read_csv(file_path, skiprows = 5)
-    return [csv_data, seg_name]
+            csv_name = seg_name[0]
+            if csv_name == 'PDFRD' or 'PSPIWP':
+                csv_iso = seg_name[2]
+            else:
+                csv_iso = seg_name[1]
+            if len(csv_iso) == 8:
+                splt_iso = csv_iso.split('ISO')
+                splt_iso[0] = splt_iso[0] + '0'
+                csv_iso = splt_iso[0] + splt_iso[1]
+            if csv_iso == iso and csv_name == name:
+                file_path = os.path.join(folder_path, filename)
+                csv_data = pd.read_csv(file_path, skiprows = 5)
+            else:
+                return False
+    return csv_data
             
